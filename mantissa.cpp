@@ -6,7 +6,7 @@ using namespace std;
 //makes the numerator into the right side of the decimal point of the original array
 //makes the denominator into the proper multiple of 10 based on the numerator
 //if the array is not a proper decimal, the passed ints numerator and denominator will remain unchanged
-bool mantissa(char numString[], int& numerator, int& denominator)
+bool mantissa(const char numString[], int& numerator, int& denominator)
 {
     //numerator will have a maximum of 10 digits
     char arrNumerator[10];

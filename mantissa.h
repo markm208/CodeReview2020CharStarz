@@ -1,4 +1,4 @@
 #pragma once
 
 
-bool mantissa(char numString[], int& numerator, int& denominator);
+bool mantissa(const char numString[], int& numerator, int& denominator);
