@@ -7,7 +7,7 @@ int multiplyTwoNums(int num1, int num2){
 
     int product = 0;
 
-    //adding the larger number to itself 
+    //adding the larger number to itself
     
     if(num1 >= num2){
         for(int i = 0; i < num2; i++){
@@ -22,6 +22,8 @@ int multiplyTwoNums(int num1, int num2){
 
     return product;
 }
+
+
 
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len){
 

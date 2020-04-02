@@ -4,23 +4,56 @@
 
 using namespace std;
 
-int main()
-{
-    cout<<"In-class Code Review"<<endl;
 
-    char cArray[] = {1};
-    int n1 = 23;
-    int d1 = 100;
-    int n2 = 3;
-    int d2 = 10;
+void getNewNumerators(int& numeratorOne, int denominatorOne, int& numeratorTwo, int denominatorTwo);
 
-    int c1 = 24;
-    int c2 = 12;
+int main(){
 
-    int len = 12;
-
-    cout << multiply(c1, n1, d1, c2, n2, d2, cArray, len) << endl;
-    cout << divide(c1, n1, d1, c2, n2, d2, cArray, len) << endl;
-    
     return 0;
 }
+
+// int moveXtoRight(int rightSideNum){
+//     int decimalPlaces = 0;
+//     int localNum = rightSideNum;
+//     int throwaway = 0;
+
+
+//     while(localNum > rightSideNum){
+
+//         decimalPlaces = divideTwoNums(localNum, 10, throwaway);
+
+//     }
+
+//     cout << decimalPlaces << endl;
+
+//     return decimalPlaces;
+
+// }
+
+// void getNewNumerators(int& numeratorOne, int denominatorOne, int& numeratorTwo, int denominatorTwo){
+
+//     int moveNumOne = moveXtoRight(denominatorOne);
+//     int moveNumTwo = moveXtoRight(denominatorTwo);
+   
+//     int newNumeratorOne = numeratorOne;
+//     int newNumeratorTwo = numeratorTwo;
+
+//     if(moveNumOne >= moveNumTwo){
+
+//         for(int i = 0; i < moveNumOne; i++){
+//             newNumeratorOne += multiplyTwoNums(newNumeratorOne, 10);
+//             newNumeratorTwo += multiplyTwoNums(newNumeratorTwo, 10);
+//         }
+
+//     }
+//     else{
+//         for(int i = 0; i < moveNumTwo; i++){
+//             newNumeratorOne += multiplyTwoNums(newNumeratorOne, 10);
+//             newNumeratorTwo += multiplyTwoNums(newNumeratorTwo, 10);
+//         }
+//     }
+
+//     numeratorOne = newNumeratorOne;
+//     numeratorTwo = newNumeratorTwo;
+
+// }

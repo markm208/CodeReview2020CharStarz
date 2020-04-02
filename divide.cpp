@@ -8,14 +8,14 @@ int divideTwoNums(int dividend, int divisor, int& defaultRemainder){
     int quotient = 0;
     int remainder = 0;
 
-    int tempDividend = abs(dividend); 
-    int tempDivisor = abs(divisor); 
+    int tempDividend = abs(dividend);
+    int tempDivisor = abs(divisor);
 
     if(tempDividend >= tempDivisor){
         while(tempDividend >= tempDivisor){
             tempDividend -= tempDivisor;
             quotient++;
-            remainder = tempDivisor;
+            remainder = tempDividend;
         }
     }
     else{
