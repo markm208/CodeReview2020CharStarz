@@ -3,7 +3,7 @@
 
 using namespace std;
 
-//Returns the characteristic for a passed in c_str of a number
+//Saves the characteristic in c and returns true if it worked and false if something went wrong
 bool characteristic(char numString[], int& c)
 {
 
@@ -20,14 +20,36 @@ bool characteristic(char numString[], int& c)
 
 	//our current index in the char[]
 	int index = 0;
+
+	int decCount = 0;
+	//Checks for multiple decimal points that would make an invalid number
+	while (numString[index] != '\0')
+	{
+		//Count the number of decimal points
+		if (numString[index] == '.')
+		{
+			decCount++;
+		}
+		index++;
+	}
+
+	//If there are multiple decimal points the number is invalid
+	if (decCount > 1)
+	{
+		retVal = false;
+	}
+
+	//reset index for use in the next loop
+	index = 0;
+
 	//while we are on the left side of the decimal and not at the end of the char[]
-	while (numString[index] != '.' && numString[index] != '\0')
+	while (numString[index] != '.' && numString[index] != '\0' && retVal == true)
 	{
 		//if the numString has a space as a character
 		if (numString[index] == ' ')
 		{
 			//if it is in the middle of a number then the char[] is invalid
-			if (c != 0 && !neg)
+			if (c != 0 || neg)
 			{
 				retVal = false;
 				break;
@@ -42,7 +64,7 @@ bool characteristic(char numString[], int& c)
 		else if (numString[index] == '-')
 		{
 			//if it is in the middle of a number then the char[] is invalid
-			if (c != 0)
+			if (c != 0 || neg)
 			{
 				retVal = false;
 				break;
@@ -53,8 +75,24 @@ bool characteristic(char numString[], int& c)
 				neg = true;
 			}
 		} //if the char falls in the ascii range for numbers
+		else if (numString[index] == '+')
+		{
+			//if it is in the middle of a number then the char[] is invalid
+			if (c != 0)
+			{
+				retVal = false;
+				break;
+			}
+		} //if the char falls in the ascii range for numbers
 		else if ((int)numString[index] >= 48 && (int)numString[index] <= 57)
 		{
+			//Ensures we can never return numbers that passed INT_MAX
+			if (INT_MAX - ((int)numString[index] - asciiIndex) < (c * 10))
+			{
+				retVal = false;
+				break;
+			}
+			
 			//move our current number left by one digit by multiplying by 10
 			//then add the new digit after converting from the ascii code to a regular number
 			c = ((int)numString[index] - asciiIndex) + (c * 10);

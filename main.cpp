@@ -8,7 +8,7 @@ int main()
     cout<<"In-class Code Review"<<endl;
 
     //test char[]
-	char a[] = { '1', '2', '5', '4', '.', '4', '9' };
+	char a[] = { '1', '2', '5', '4', '.', '4', '9', '\0' };
 
 	//the result int
 	int character;
@@ -21,7 +21,7 @@ int main()
 		cout << "the result was invalid" << endl;
 	}
 
-	char b[] = { '-', '2', '5', '4', '4', '9' };
+	char b[] = { '-', '2', '5', '.', '4', '9', '\0' };
 
 	if (characteristic(b, character))
 	{
@@ -32,7 +32,7 @@ int main()
 		cout << "the result was invalid" << endl;
 	}
 
-	char c[] = { '-', '2', '5', ' ', '4', '9' };
+	char c[] = { '-', '2', '5', '9', '\0' };
 
 	if (characteristic(c, character))
 	{
