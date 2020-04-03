@@ -29,6 +29,17 @@ takes in a single char and returns true if the char is a number
     return retVal;
 }
 
+
+void trailingZeroRemove(int& num)
+{
+    while (num % 10 == 0)
+    {
+        num /= 10;
+    }
+}
+
+
+
 /*
 int takeToPower(int base, int exponent)
 {
@@ -84,6 +95,8 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
     //numerator will have a maximum of 10 digits   
     bool goodNumber = true;
     bool rightOfDecimal = false;
+    bool hasSeenNumber = false;
+    bool isNeg = false;
     int decimalCounter = 0;
     int numSize = 0;
     int arrSize = charArrayLength(numString);
@@ -95,8 +108,12 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
         if (!isADigit(numString[i]))
         {
             //allows for + or - as the first value
-            if (i == 0 && (currentValue == '+' || currentValue == '-'))
+            if (!hasSeenNumber && (currentValue == '+' || currentValue == '-'))
             {
+                if (currentValue == '-')
+                {
+                    isNeg = true;
+                }
                 continue;
             }
 
@@ -132,6 +149,10 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
             {
                 numerator = ((int)numString[i] - (int)'0') + (numerator * 10);
                 numSize++;
+                if (!hasSeenNumber)
+                {
+                    hasSeenNumber = true;
+                }
             }
             else
             {
@@ -139,6 +160,13 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
             }
         }
     }
+
+    trailingZeroRemove(numerator);
+    numerator = isNeg ? numerator * -1 : numerator;
+
+
+
+
     denominator = 1;
 
     for (int i = 0; i < numSize; i++)
@@ -146,6 +174,7 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
         denominator *= 10;
     }
 
+    denominator = denominator == 1 ? 10 : denominator;
     return goodNumber;
 }
 
