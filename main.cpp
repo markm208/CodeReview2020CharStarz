@@ -54,10 +54,10 @@ void testCharacteristicAndMantissa()
     shouldConvert("   -0.456", 0, -456, 1000);
     shouldConvert("-0.456   ", 0, -456, 1000);
     shouldConvert("   -0.456   ", 0, -456, 1000);
-    shouldConvert("+0.456", 0, -456, 1000);
-    shouldConvert("   +0.456", 0, -456, 1000);
-    shouldConvert("+0.456   ", 0, -456, 1000);
-    shouldConvert("   +0.456   ", 0, -456, 1000);
+    shouldConvert("+0.456", 0, 456, 1000);
+    shouldConvert("   +0.456", 0, 456, 1000);
+    shouldConvert("+0.456   ", 0, 456, 1000);
+    shouldConvert("   +0.456   ", 0, 456, 1000);
 
     //number with no characteristic digits and a non-zero mantissa
     shouldConvert(".456", 0, 456, 1000);
@@ -69,10 +69,10 @@ void testCharacteristicAndMantissa()
     shouldConvert("    -.456", 0, -456, 1000);
     shouldConvert("-.456   ", 0, -456, 1000);
     shouldConvert("   -.456   ", 0, -456, 1000);
-    shouldConvert("+.456", 0, -456, 1000);
-    shouldConvert("    +.456", 0, -456, 1000);
-    shouldConvert("+.456   ", 0, -456, 1000);
-    shouldConvert("   +.456   ", 0, -456, 1000);
+    shouldConvert("+.456", 0, 456, 1000);
+    shouldConvert("    +.456", 0, 456, 1000);
+    shouldConvert("+.456   ", 0, 456, 1000);
+    shouldConvert("   +.456   ", 0, 456, 1000);
 
     //number with a non-zero characteristic and no mantissa
     shouldConvert("123456", 123456, 0, 10);
@@ -84,10 +84,10 @@ void testCharacteristicAndMantissa()
     shouldConvert("   -123456", -123456, 0, 10);
     shouldConvert("-123456   ", -123456, 0, 10);
     shouldConvert("   -123456   ", -123456, 0, 10);
-    shouldConvert("+123456", -123456, 0, 10);
-    shouldConvert("   +123456", -123456, 0, 10);
-    shouldConvert("+123456   ", -123456, 0, 10);
-    shouldConvert("   +123456   ", -123456, 0, 10);
+    shouldConvert("+123456", 123456, 0, 10);
+    shouldConvert("   +123456", 123456, 0, 10);
+    shouldConvert("+123456   ", 123456, 0, 10);
+    shouldConvert("   +123456   ", 123456, 0, 10);
 
     //number with a non-zero characteristic and a zero mantissa
     shouldConvert("123456.0", 123456, 0, 10);
@@ -99,10 +99,10 @@ void testCharacteristicAndMantissa()
     shouldConvert("   -123456.0", -123456, 0, 10);
     shouldConvert("-123456.0   ", -123456, 0, 10);
     shouldConvert("   -123456.0   ", -123456, 0, 10);
-    shouldConvert("+123456.0", -123456, 0, 10);
-    shouldConvert("   +123456.0", -123456, 0, 10);
-    shouldConvert("+123456.0   ", -123456, 0, 10);
-    shouldConvert("   +123456.0   ", -123456, 0, 10);
+    shouldConvert("+123456.0", 123456, 0, 10);
+    shouldConvert("   +123456.0", 123456, 0, 10);
+    shouldConvert("+123456.0   ", 123456, 0, 10);
+    shouldConvert("   +123456.0   ", 123456, 0, 10);
 
     //check leading and trailing zeros
     shouldConvert("000123.456", 123, 456, 1000);

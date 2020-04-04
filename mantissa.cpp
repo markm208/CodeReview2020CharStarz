@@ -30,11 +30,13 @@ takes in a single char and returns true if the char is a number
 }
 
 
-void trailingZeroRemove(int& num)
+void trailingZeroRemove(int& num, int& count)
 {
-    while (num % 10 == 0)
+    count = 0;
+    while (num % 10 == 0 && num != 0)
     {
         num /= 10;
+        count++;
     }
 }
 
@@ -96,6 +98,7 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
     bool goodNumber = true;
     bool rightOfDecimal = false;
     bool hasSeenNumber = false;
+    bool zeroOnLeft = true;
     bool isNeg = false;
     int decimalCounter = 0;
     int numSize = 0;
@@ -141,6 +144,14 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
                 break;
             }
         }
+        else 
+        {
+            hasSeenNumber = true;
+        }
+        if (currentValue != '0' && zeroOnLeft && !rightOfDecimal)
+        {
+            zeroOnLeft = false;
+        }
 
         //builds the numerator from the numbers on the right side of the decimal place
         if (rightOfDecimal)
@@ -161,8 +172,12 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
         }
     }
 
-    trailingZeroRemove(numerator);
-    numerator = isNeg ? numerator * -1 : numerator;
+    int temp = numerator;
+    int count;
+    trailingZeroRemove(numerator,count);
+    numSize = temp == numerator ? numSize : numSize - count;
+    numerator = isNeg && zeroOnLeft ? numerator * -1 : numerator;
+    //numSize = temp == denominator ? numSize : temp / numerator;
 
 
 
@@ -175,6 +190,6 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
     }
 
     denominator = denominator == 1 ? 10 : denominator;
-    return goodNumber;
+    return goodNumber && hasSeenNumber;
 }
 
