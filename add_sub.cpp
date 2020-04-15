@@ -1,9 +1,9 @@
-#include "add_sub.h"
+#include "add_sub.hpp"
 #include <iostream>
 using namespace std;
-bool sub(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
+bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
-    if (add(c1,n1,d1,-c2,-n2,-d2,result,len) == true)
+    if (add(c1,n1,d1,-c2,n2,d2,result,len) == true)
     {
         return true;
     }
@@ -21,16 +21,27 @@ bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
         cout << "Error: cannot divide by zero" << endl;
         return 1;
     }
-    if (length == 0|| length ==1)
+    if (length == 0|| length == 1 || length == 2)
     {
-        cout << "Error: length of array must be greater than 1 to show any numbers" << endl;
+        cout << "Error: length of array must be greater than 2 to show any numbers" << endl;
+        return 1;
+    }
+    if(len > 10)
+    {
+        cout << "Error: Int can only hold numbers with a langth og 10 or less"  << endl;
         return 1;
     }
     // return value set to true;
     bool retVal = true;
     // int counter for left of decimal point.
-    int whole_num = c1+c2;
     
+    int whole_num = c1+c2;
+    if (whole_num<0)
+    {
+        whole_num *= -1;
+        result[0] = '-';
+        length--;
+    }
     //function call to get the least common denomintor
     int demominator = get_denominator(d1, d2);
     
@@ -44,22 +55,30 @@ bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
         numerator -= demominator;
         whole_num++;
     }
-    
     //calculates the decimal point
     int decimal = ((1000000000/demominator)*numerator);
-    
+    if (whole_num == 0 && decimal == 0)
+    {
+        result[0] = '0';
+        result[1] = '\n';
+        length--;
+        print(len,length, result);
+        return 0;
+    }
     // length of a whole number
     int size_of_int_whole = get_length_of_int(whole_num);
     // length of decemal
     int size_of_int_dec = get_length_of_int(decimal);
     
+    //cout <<size_of_int_whole << ": " << size_of_int_dec << endl;
     //index of the first number in an int
     // adds everything left of the decimal
     add_to_array(whole_num, size_of_int_whole, result, length, len);
-    if (is_length_1(length))
+    
+    if (is_length_1(length)|| decimal == 0)
     {
         result[len-1] = '\0';
-        print(len, result);
+        print(len,length, result);
         return 0;
     }
     //add decimal
@@ -68,7 +87,7 @@ bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
     if (is_length_1(length))
     {
         result[len-1] = '\0';
-        print(len, result);
+        print(len,length, result);
         return 0;
     }
     // add rest of decimal points
@@ -76,11 +95,11 @@ bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
     if (is_length_1(length))
     {
         result[len-1] = '\0';
-        print(len, result);
+        print(len,length, result);
         return 0;
     }
     //cout << whole_num <<'.'<< decimal/10%10 << endl;
-    print(len, result);
+    print(len,length, result);
     return retVal;
 }
 // adds the numerator of a fraction
@@ -191,9 +210,9 @@ bool is_length_1(int length)
     return false;
 }
 //print
-void print(int len, char result[])
+void print(int len, int length, char result[])
 {
-    for (int i=0; i<len; i++)
+    for (int i=0; i<(len-length); i++)
     {
         cout << result[i];
     }
@@ -209,3 +228,4 @@ int get_index_size(int size)
     }
     return temp;
 }
+
